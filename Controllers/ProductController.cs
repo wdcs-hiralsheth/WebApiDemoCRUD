@@ -24,31 +24,31 @@ namespace WebApiDemo_1_12.Controllers
             return "Product Added";
         }
         //return otp api
-        [HttpGet]
-        public string GenerateOtp(string mobileno)
-        {
+        //[HttpGet]
+        //public string GenerateOtp(string mobileno,string username,string api_password,string sender, string to,string message,string priority,string e_id,string t_id)
+        //{
 
-            Random rnd = new Random();
-            var otp = rnd.Next(100000, 999999).ToString();
-            var api = new PlivoApi("MAYMMYNDGZMGMWMDASNT","ODg");
-            //var response = api.Message.Create(
-            //    src:"SARPANCH",
-            //    dst:"+91"+mobileno,
-            //    text:otp
-            //    //to: new List<String> { "<Caller_ID>" },
-            //    //from: "<Destination_Number>",
-            //    //answerMethod: "GET",
-            //    //answerUrl: "http://s3.amazonaws.com/static.plivo.com/answer.xml"
-            //);
-           //// Console.WriteLine(response);
-           // HttpContext.Current.Session["TestSessionValue"] = null;
-           // HttpContext.Current.Session.Add("OTP", otp);
-           // string a = "OTP send to your Registered mobile number";
-            
+        //    Random rnd = new Random();
+        //    var otp = rnd.Next(100000, 999999).ToString();
+        //  //  var api = new PlivoApi("MAYMMYNDGZMGMWMDASNT","ODg");
+        //    //var response = api.Message.Create(
+        //    //    src:"SARPANCH",
+        //    //    dst:"+91"+mobileno,
+        //    //    text:otp
+        //    //    //to: new List<String> { "<Caller_ID>" },
+        //    //    //from: "<Destination_Number>",
+        //    //    //answerMethod: "GET",
+        //    //    //answerUrl: "http://s3.amazonaws.com/static.plivo.com/answer.xml"
+        //    //);
+        //   //// Console.WriteLine(response);
+        //   // HttpContext.Current.Session["TestSessionValue"] = null;
+        //   // HttpContext.Current.Session.Add("OTP", otp);
+        //   // string a = "OTP send to your Registered mobile number";
 
-            return otp;
-        }
 
+        //    return otp;
+        //}
+        
         //[HttpPost]
         //[ResponseType(typeof(Product))]
         //public async Task<IHttpActionResult> Post([FromBody] Product product)

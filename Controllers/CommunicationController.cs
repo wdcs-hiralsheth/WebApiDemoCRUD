@@ -17,24 +17,29 @@ namespace WebApiDemo_1_12.Controllers
     public class CommunicationController : ApiController
     {
         [HttpGet]
-        public async Task<IHttpActionResult> GenerateOtp(string mobileno, string username, string api_password, string sender, string to,string priority,string e_id,string t_id)
+        public async Task<IHttpActionResult> GenerateOtp(string username, string api_password, string sender, string to,string priority,string e_id,string t_id)
         {
 
             Random rnd = new Random();
             var otp = rnd.Next(100000, 999999).ToString();
             string URL = "";
-            string MainUrl = "pushsms.php?";
+            string MainUrl = "http://www.bulk-sms.in/pushsms.php?";
             string Message =null;
-            Message = "Dear Customer,"+ otp + "is your OTP to register on Post It. Use this code to validate your Sign Up. It will valid till 03 minutes. Code One Zero Technologies Private Limited";
+            Message = "Dear Customer, "+ otp + " is your OTP to register on Post It. Use this code to validate your Sign Up. It will valid till 03 minutes. Code One Zero Technologies Private Limited";
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://www.bulk-sms.in/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.BaseAddress = new Uri(MainUrl);
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //GET Method
-                URL = MainUrl + "username=" + User + "&api_password=" + api_password + "&sender=" + sender + "&message=" + HttpUtility.UrlEncode(Message).Trim() + "&priority=" + priority + "&e_id=" +e_id+"&t_id="+t_id;
+                URL = MainUrl + "username=" + username.Trim() + "&api_password=" + api_password.Trim() + "&sender=" + sender.Trim() + "&to="+to.Trim()+"&message=" + (Message).Trim() + "&priority=" + priority.Trim() + "&e_id=" +e_id.Trim() + "&t_id="+t_id.Trim();
                 
-                HttpResponseMessage response = await client.GetAsync(URL);
+                //HttpResponseMessage response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, URL));
+                var msg = new HttpRequestMessage(HttpMethod.Get, URL);
+                //msg.Headers.Add("User-Agent", "C# Program");
+                //msg.Headers.Add("User-Agent", "C# Program");
+                var response = await client.SendAsync(msg);
+
                 if (response.IsSuccessStatusCode)
                 {
                     return Ok(otp);
